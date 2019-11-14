@@ -1,0 +1,59 @@
+<mvc:View
+	controllerName="zbrlogu000001.controller.ObjectOF2"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout">
+ 
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>objectTitleOF2}: {/Ordem}" />
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+			<FlexBox
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+				<Panel backgroundDesign="Transparent">
+					<ObjectAttribute
+						title="{i18n>objectEntryTime}"
+						text="{
+						path: '/Z02ChangedOned'}"/>
+					<ObjectAttribute
+						title="{i18n>ObjectDriverName}"
+						text="{
+						path: '/Motorista'}"/>
+					<ObjectAttribute
+						title="{i18n>ObjectUserNameIn}"
+						text="{
+						path: '/Z02ChangedBy'}"/>
+				</Panel>
+				<Panel backgroundDesign="Transparent">
+				    <Button text="{i18n>ObjectButtonSaida}" type="Accept" press="onPressConfirm" id="button1"/>
+				</Panel>
+			</FlexBox>
+    	</semantic:headerContent>
+	    <semantic:content>
+	    	<l:VerticalLayout width="100%">
+				<Panel
+                    backgroundDesign="Transparent"
+                    headerText="{i18n>ObjectCommentsTabTitle} ">
+                    <content>
+                        <FeedInput 
+                        	id="commentOrder"
+                        	post=".onPost"
+                        	showIcon="false" />
+                    </content>
+                </Panel>
+            </l:VerticalLayout>	
+	    </semantic:content>
+	</semantic:SemanticPage>
+
+</mvc:View>

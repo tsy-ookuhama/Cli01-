@@ -1,0 +1,79 @@
+<edmx:Edmx 
+	xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+	<edmx:DataServices
+		xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+		<Schema
+			xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+			xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="NorthwindModel">
+
+			<EntityType Name="Ordem">
+				<Key>
+					<PropertyRef Name="Ordemfrete"/>
+				</Key>
+				<Property xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" Name="Ordemfrete" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity"/>
+				<Property Name="EventCode" Type="Edm.Int32" Nullable="true"/>
+				<Property Name="Transportador" Type="Edm.String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false"/>
+				<Property Name="Recurso" Type="Edm.Int32" Nullable="true"/>
+				<Property Name="Placa" Type="Edm.String" Nullable="true" MaxLength="20" Unicode="true" FixedLength="false"/>
+				<Property Name="Freightunit" Type="Edm.Decimal" Nullable="true" Precision="19" Scale="4"/>
+				<Property Name="Bp" Type="Edm.Int16" Nullable="true"/>
+				<Property Name="Cliente" Type="Edm.Int16" Nullable="true"/>
+				<Property Name="Remessa" Type="Edm.Int16" Nullable="true"/>
+				<Property Name="Dtplanejada" Type="Edm.Boolean" Nullable="false"/>
+			</EntityType>
+			
+			<EntityType Name="Nota">
+				<Key>
+				    <PropertyRef Name="NotaNFNR"/>
+					<PropertyRef Name="Ordemfrete"/>
+				</Key>
+				<Property Name="ValorNF" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4"/>
+			</EntityType>
+			
+			<Association Name="FK_Ordens_Notas">
+				<End Role="Ordens" Type="NorthwindModel.Ordem" Multiplicity="0..1"/>
+				<End Role="Notas" Type="NorthwindModel.Nota" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="Ordens">
+						<PropertyRef Name="Ordemfrete"/>
+					</Principal>
+					<Dependent Role="Notas">
+						<PropertyRef Name="Ordemfrete"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+
+			<EntityType Name="HT001wSet">
+				<Key>
+					<PropertyRef Name="Werks"/>
+				</Key>
+				<Property xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" Name="Werks" Type="Edm.String" Nullable="false" p8:StoreGeneratedPattern="Identity"/>
+				<Property Name="Sort2" Type="Edm.String" Nullable="false"/>
+				<Property Name="Sort1" Type="Edm.String" Nullable="true"/>
+				<Property Name="PostCode1" Type="Edm.String" Nullable="true"/>
+				<Property Name="City1" Type="Edm.String" Nullable="true"/>
+				<Property Name="Name2" Type="Edm.String" Nullable="true"/>
+				<Property Name="Name1" Type="Edm.String" Nullable="true"/>
+				<Property Name="Nation" Type="Edm.String" Nullable="true"/>
+			</EntityType>
+								
+		</Schema>
+		
+		<Schema
+			xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+			xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ODataWeb.Northwind.Model">
+			<EntityContainer
+				xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation" Name="NorthwindEntities" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="Ordens" EntityType="NorthwindModel.Ordem"/>
+				<EntitySet Name="Notas" EntityType="NorthwindModel.Nota"/>
+				<AssociationSet Name="FK_Ordens_Notas" Association="NorthwindModel.FK_Ordens_Notas">
+					<End Role="Ordens" EntitySet="Ordens"/>
+					<End Role="Notas" EntitySet="Notas"/>
+				</AssociationSet>				
+				<EntitySet Name="HT001wSets" EntityType="NorthwindModel.HT001wSet"/>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

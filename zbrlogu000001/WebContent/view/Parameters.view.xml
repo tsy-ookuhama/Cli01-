@@ -1,0 +1,42 @@
+<core:View 
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="zbrlogu000001.controller.Parameters"
+	xmlns:f="sap.ui.layout.form"
+	action:wiring="\{'beforeExit':\{'navigation':\{'routeName':'Worklist'\}\}\}">
+	 
+	<Page
+	    showNavButton="true" 
+	    showHeader="false">
+		<content>
+				<f:SimpleForm title="{i18n>worklistTitle}"
+							  editable="true"
+							  layout="ResponsiveGridLayout">
+							  <f:content>
+							  		<Label text="Planta" />
+							  		<MultiInput
+							  			id="idInput"
+							  			required="true"
+							  			showValueHelp="true"
+							  			showSuggestion="true"
+							  			width="10em"
+							  			valueHelpRequest="handleF4Planta"/>
+							  		<Label text="{i18n>paramDe}" id="label1"/>
+				              		<DatePicker 
+				              			id="dataDe" 
+				              			required="true"
+				              			width="25%"/>
+				              		<Label text="{i18n>paramAte}" id="label2"/>
+				              		<DatePicker 
+				              			id="dataAte" 
+				              			required="true"
+				              			width="25%"/>
+							  </f:content>
+				</f:SimpleForm>
+			<Button text="Iniciar" type="Accept" press="onPress" id="button0"/>
+		</content>
+	</Page>
+</core:View>

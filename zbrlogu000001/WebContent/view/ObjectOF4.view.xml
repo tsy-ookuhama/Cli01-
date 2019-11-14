@@ -1,0 +1,154 @@
+<mvc:View
+	controllerName="zbrlogu000001.controller.ObjectOF4"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>objectTitleOF4}: {/Ordem}" />
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+			<FlexBox
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+
+				<Panel
+					width = "100%" 
+					backgroundDesign="Transparent">
+				   	<Button text="{i18n>ObjectButtonImprimir}" type="Accept" press="onPressImprimir2"/>
+				   	<Button text="{i18n>ObjectButtonVoltar}" type="Accept" press="onNavBack"/>
+				</Panel>
+			</FlexBox>
+			<FlexBox
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+
+				<l:VerticalLayout width="100%">
+					<Panel
+						headerText = "{i18n>ObjectDetOF}"
+						backgroundDesign="Transparent">
+						<ObjectAttribute
+							title="{i18n>ObjectCustomer}"
+							text="{
+							path: '/Cliente'}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectTransporterTitle}"
+							text="{
+							path: '/Transportador'}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectDriverName}"
+							text="{
+							  parts: 
+							  [
+							    {path: '/Motorista'},
+							    {path: '/BpName'}
+							  ]
+							}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectlicensePlateText}"
+							text="{
+							  parts: 
+							  [
+           					    {path: '/Placa'},
+           					    {path: '/PlacaUf'}
+							  ]
+           					}"/>
+					</Panel>
+					<Panel 
+						headerText = "{i18n>ObjectMvtInt}"
+						backgroundDesign="Transparent">
+						<ObjectAttribute
+							title="{i18n>ObjectEntryVeh}"
+							text="{
+							path: '/Z02ChangedOned'}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectUserNameIn}"
+							text="{
+							path: '/Z02ChangedBy'}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectOutVeh}"
+							text="{
+							path: '/Z04ChangedOned'}"/>
+						<ObjectAttribute
+							title="{i18n>ObjectUserNameOut}"
+							text="{
+							path: '/Z04ChangedBy'}"/>
+					</Panel>
+
+                </l:VerticalLayout>	
+			</FlexBox>
+			<FlexBox
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+			    <l:VerticalLayout>	
+					<Panel>
+						<Table id="cfopTable"
+							insert="false"
+							items="{path: '/d/results'}"> 
+							<columns>
+								<Column>
+									<Text text="{i18n>TableNameColumnCfop}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>TableNameColumnCfopTxt}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+								         <ObjectIdentifier
+								            title="{Cfop}"/>
+								         <Text text = "{Cfotxt}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+	    			    </Table> 
+			 	    </Panel>
+					<Panel>
+ 						<Table 
+ 							id="nfsTable"
+							insert="false"
+	  						items="{path: '/d/results'}"> 
+							<columns>
+								<Column>
+									<Text text="{i18n>TableNameColumnNf}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>TableNameColumnAsnRelevanteColumn}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>TableNameColumnAsnEnviado}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>TableNameColumnAsnDatahora}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+								         <ObjectIdentifier
+								            title="{Nfenum}"/>
+								         <Text text = "{AsnRelevante}"/>
+								         <Text text = "{AsnEnviado}"/>
+							             <Text text ="{AsnDatahoratxt}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+					    </Table>                
+				    </Panel>
+		        </l:VerticalLayout>	
+			</FlexBox>
+    	</semantic:headerContent>
+	</semantic:SemanticPage>
+</mvc:View>

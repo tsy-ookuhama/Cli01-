@@ -1,0 +1,165 @@
+{
+	"_version": "1.12.0",
+
+	"sap.app": {
+		"id": "zbrlogu000001",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"resources": "resources.json",
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZBRLOG_COCKPIT_PORTARIA_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://task",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "zbrlogu000001.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.f": {},
+				"sap.ui.comp": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "zbrlogu000001.i18n.i18n"
+				}
+			},
+			"Param": {
+				"dataSource": "mainService"
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": false,
+				"settings": {
+					"defaultCountMode": "None"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "zbrlogu000001.MaxionRouter",
+				"viewType": "XML",
+				"viewPath": "zbrlogu000001.view",
+				"controlId": "app",
+				"clearAggregation": true,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": ["notFound"]
+				},
+				"async": "true",
+				"clearTarget": "true"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "parameters",
+					"target": ["parameters"]
+				},
+				{
+					"pattern": "worklist",
+					"name": "worklist",
+					"target": ["worklist"]
+				},
+				{
+					"pattern": "Ordens/{objectId}",
+					"name": "object",
+					"target": ["object"]
+				},
+				{
+					"pattern": "ObjectOF2/{objectId}",
+					"name": "objectOF2",
+					"target": ["objectOF2"]
+				},
+				{
+					"pattern": "ObjectOF4/{objectId}",
+					"name": "objectOF4",
+					"target": ["objectOF4"]
+				}
+			],
+			"targets": {
+				"parameters": {
+					"viewName": "Parameters",
+					"viewId": "parameters",
+					"viewLevel": 1,
+					"title": "{i18n>worklistViewTitle}"
+				},
+				"worklist": {
+					"viewName": "Worklist",
+					"viewId": "worklist",
+					"viewLevel": 1,
+					"title": "{i18n>worklistViewTitle}"
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2,
+					"title": "{i18n>objectViewTitle}"
+				},
+				"objectOF2": {
+					"viewName": "ObjectOF2",
+					"viewId": "objectOF2",
+					"viewLevel": 2,
+					"title": "{i18n>objectViewTitle}"
+				},
+				"objectOF4": {
+					"viewName": "ObjectOF4",
+					"viewId": "objectOF4",
+					"viewLevel": 2,
+					"title": "{i18n>objectViewTitle}"
+				},
+				"objectNotFound": {
+					"viewName": "ObjectNotFound",
+					"viewId": "objectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	}
+}

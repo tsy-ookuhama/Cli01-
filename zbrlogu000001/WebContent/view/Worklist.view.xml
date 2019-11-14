@@ -1,0 +1,167 @@
+<mvc:View
+	controllerName="zbrlogu000001.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+	 
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" />
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<IconTabBar
+				id="iconTabBar"
+				select=".onQuickFilter"
+				expandable="false"
+				headerBackgroundDesign="Transparent">
+				<items>
+					<IconTabFilter
+						key="all"
+						showAll="true"
+						count="{worklistView>/countAll}"
+						text="{i18n>WorklistFilterOrdersAll}"/>
+					<IconTabSeparator/>
+					<IconTabFilter
+						key="naoChegaram"
+						icon="sap-icon://inventory"
+						iconColor="Negative"
+						count="{worklistView>/naoChegaram}"
+						text="{i18n>WorklistFilterNotArrived}"/>
+					<IconTabFilter
+						key="naPlanta"
+						icon="sap-icon://message-warning"
+						iconColor="Critical"
+						count="{worklistView>/naPlanta}"
+						text="{i18n>WorklistFilterInThePlant}"/>
+					<IconTabFilter
+						key="despachados"
+						icon="sap-icon://message-success"
+						iconColor="Positive"
+						count="{worklistView>/despachados}"
+						text="{i18n>WorklistFilterDispatched}"/>
+				</items>		
+				<content>
+					<Table
+						id="table"
+						width="auto"
+						noDataText="{worklistView>/tableNoDataText}"
+						busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+						growing="false"
+						updateFinished=".onUpdateFinished"
+						updateStarted=".onUpdateStarted"
+						items="{
+							path: '/Ordens',
+							sorter: {
+								path: 'Ordemfrete',
+								descending: false
+							}
+						}">
+		
+						<headerToolbar>
+							<Toolbar>
+								<ToolbarSpacer />
+								<SearchField
+									id="searchField"
+									tooltip="{i18n>worklistSearchTooltip}"
+									search=".onSearch"
+									width="auto">
+								</SearchField>
+							</Toolbar>
+						</headerToolbar>
+		
+						<columns>
+							<Column id="nameColumn">
+								<Text
+									id="nameColumnTitle"
+									text="{i18n>TableNameColumnTitle}"/>
+							</Column>
+							<Column
+								id="TransporterNameColumn"
+								demandPopin="false"
+								minScreenWidth="Tablet">
+								<Text text="{i18n>TableTransporterColumnTitle}"/>
+							</Column>
+							<Column
+								id="unitResourceColumn"
+								hAlign="End">
+								<Text text="{i18n>TableResourceColumnTitle}"/>
+							</Column>
+							<Column
+								id="licensePlateColumn"
+								hAlign="End">
+								<Text text="{i18n>TablelicensePlateColumnTitle}"/>
+							</Column>
+							<Column
+								id="freightUnitColumn"
+								hAlign="End">
+								<Text text="{i18n>TablefreightUnitColumnTitle}"/>
+							</Column>
+							<Column
+								id="BPColumn"
+								hAlign="End">
+								<Text text="{i18n>TableBPColumnTitle}"/>
+							</Column>
+							<Column
+								id="customerSupplierColumn"
+								hAlign="End">
+								<Text text="{i18n>TablecustomerSupplierColumnTitle}"/>
+							</Column>
+							<Column
+								id="ShippingColumn"
+								hAlign="End">
+								<Text text="{i18n>TableShippingColumnTitle}"/>
+							</Column>
+							<Column
+								id="unitsInStockColumn6"
+								hAlign="End">
+								<Text text="{i18n>TabledtPlanColumnTitle}"/>
+							</Column>
+							<Column
+								id="unitsInStockColumn7"
+								hAlign="End">
+								<Text text="{i18n>TabletpOperColumnTitle}"/>
+							</Column>
+						</columns>
+		
+						<items>
+							<ColumnListItem
+								type="Navigation"
+								press=".onPress">
+								<cells>
+							         <ObjectIdentifier
+							            title="{Ordemfrete}"/>
+							         <Text text = "{Transportador}"/>
+							         <Text text = "{Recurso}" />
+							         <Text text = "{Placa}"/>
+							         <Text text = "{Freightunit}"/>
+							         <Text text = "{Bp}"/>
+							         <Text text = "{Cliente}"/>
+							         <Text text = "{Remessa}"/>
+							         <Text text ="{
+							         	path: 'Dtplanejada',
+							         	type: 'sap.ui.model.type.DateTime',
+							         	formatOptions: { 
+    										pattern: 'dd.MM.yyyy' 
+  										} 
+							         }"/>
+							         <Text text = "{Tpoperacao}"/>		            					
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</IconTabBar>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
